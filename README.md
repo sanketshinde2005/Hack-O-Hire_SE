@@ -1,70 +1,128 @@
-# Getting Started with Create React App
+# ReqIQ - Requirements Extraction and Analysis System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ReqIQ is a powerful AI-driven system designed to analyze textual and graphical inputs, extract functional and non-functional requirements, and structure them into standardized documents. It supports direct user inputs and uploaded files (PDFs) while incorporating public domain knowledge such as regulations and standards.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **File Upload and Analysis**: Upload PDF files to extract key requirements.
+- **AI Chat Interface**: Interact with an AI-powered system to ask questions about requirements.
+- **Concurrent Processing**: Handle multiple files and users simultaneously.
+- **Structured Output**: Generate structured requirement documents and user stories.
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend**: React with Material-UI for a modern and responsive UI.
+- **Backend**: FastAPI for handling API requests and AI integration.
+- **AI Integration**: Google Generative AI for advanced natural language processing.
+- **PDF Processing**: `pdf2image` and `Pillow` for handling PDF content.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Prerequisites
 
-### `npm test`
+- Node.js (for the frontend)
+- Python 3.9+ (for the backend)
+- Google API Key for Generative AI (set in `.env` file)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup Instructions
 
-### `npm run build`
+### 1. Clone the Repository
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone <repository-url>
+cd Hack-O-Hire/LLM
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2. Backend Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Create a virtual environment and activate it:
 
-### `npm run eject`
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Install dependencies:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Create a `.env` file in the root directory and add your Google API key:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```
+   GOOGLE_API_KEY=your-google-api-key
+   ```
 
-## Learn More
+4. Run the backend server:
+   ```bash
+   uvicorn app:app --host 0.0.0.0 --port 5000
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 3. Frontend Setup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Navigate to the frontend directory:
 
-### Code Splitting
+   ```bash
+   cd requirements-analyzer
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Install dependencies:
 
-### Analyzing the Bundle Size
+   ```bash
+   npm install
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-### Making a Progressive Web App
+### 4. Access the Application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Open your browser and navigate to `http://localhost:3000`.
 
-### Advanced Configuration
+## API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Health Check
 
-### Deployment
+- **GET** `/health`
+- Returns the status of the backend.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### File Upload
 
-### `npm run build` fails to minify
+- **POST** `/upload`
+- Accepts PDF files and extracts requirements.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Chat
+
+- **POST** `/chat`
+- Accepts a query and returns an AI-generated response.
+
+## Project Structure
+
+```
+LLM/
+├── app.py                     # Backend API
+├── requirements.txt           # Python dependencies
+├── requirements-analyzer/     # Frontend React app
+│   ├── src/
+│   │   ├── App.tsx            # Main React component
+│   │   ├── services/api.js    # API service for frontend
+│   │   └── index.tsx          # React entry point
+├── .gitignore                 # Git ignore file
+└── README.md                  # Project documentation
+```
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request for any improvements or bug fixes.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Acknowledgments
+
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [React](https://reactjs.org/)
+- [Google Generative AI](https://cloud.google.com/generative-ai)
+- [Material-UI](https://mui.com/)
